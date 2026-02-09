@@ -1,9 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Valentine 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* Sections */
+.section {
+  min-height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.section.active {
+  display: flex;
+}
+
+/* Button */
+.btn {
+  background: white;
+  color: #ff4d6d;
+  padding: 15px 35px;
+  border-radius: 40px;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: 0.3s;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* Questions */
+.question-box {
+  background: rgba(255,255,255,0.25);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 520px;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  margin-top: 15px;
+  font-size: 1rem;
+}
+
+/* Celebration */
+.container {
+  padding: 50px 20px;
+}
+
+.photos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.photos img {
+  width: 230px;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 4px solid white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  animation: floatUp 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 💌 START SECTION -->
+<div class="section active" id="startSection">
+  <h1>💌 Will You Be My Valentine? 💌</h1>
+  <button class="btn" id="startBtn">Yes My Love ❤️</button>
+</div>
+
+<!-- 💬 QUESTION SECTION -->
+<div class="section" id="questionSection">
+  <div class="question-box">
+    <h2 id="questionText"></h2>
+    <textarea id="answerInput" rows="3"
+      placeholder="Type your answer here... 💕"></textarea>
+    <button class="btn" id="nextBtn">Next 💖</button>
+  </div>
+</div>
+
+<!-- 🎉 CELEBRATION SECTION -->
+<div class="section" id="celebrationSection">
+  <div class="container">
+    <h1>💖 Happy Valentine’s Day My Love 💖</h1>
+    <h2>To My Wonderful Husband</h2>
+
+    <p>
+      Your answers made my heart melt ❤️  
+      I’m so grateful for you and our beautiful journey together.
+    </p>
+
+    <!-- 📸 LOCAL IMAGES -->
+    <div class="photos">
+      <img src="images/image1.jpg" alt="Our memory 1">
+      <img src="images/image2.jpg" alt="Our memory 2">
+      <img src="images/image3.jpg" alt="Our memory 3">
+    </div>
+
+    <h2>🎉 Forever Yours 🎉</h2>
+  </div>
+</div>
+
+<script>
+const questions = [
+  "What was your first thought when you saw me? ❤️",
+  "What do you love most about us? 💕",
+  "Which memory of ours is your favorite? 📸",
+  "Will you be my Valentine today and always? 💍"
+];
+
+let currentQuestion = 0;
+const answers = [];
+
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+startBtn.addEventListener("click", startQuestions);
+nextBtn.addEventListener("click", nextQuestion);
+
+function startQuestions() {
+  document.getElementById("startSection").classList.remove("active");
+  document.getElementById("questionSection").classList.add("active");
+  showQuestion();
+}
+
+function showQuestion() {
+  document.getElementById("questionText").innerText =
+    questions[currentQuestion];
+  document.getElementById("answerInput").value = "";
+}
+
+function nextQuestion() {
+  const input = document.getElementById("answerInput").value.trim();
+
+  if (!input) {
+    alert("Please write something for me ❤️");
+    return;
+  }
+
+  answers.push(input);
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    showCelebration();
+  }
+}
+
+function showCelebration() {
+  document.getElementById("questionSection").classList.remove("active");
+  document.getElementById("celebrationSection").classList.add("active");
+  startHearts();
+}
+
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = 18 + Math.random() * 30 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+  }, 350);
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <title>Be My Valentine</title>
 </head>
 <body>
 <h1>Happy Valentine's Day Dear</h1>
 </body>
+
 </html>
